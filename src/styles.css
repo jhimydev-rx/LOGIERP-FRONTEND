@@ -1,0 +1,73 @@
+/* Basic browser controls, no visual framework or theme. */
+body {
+  font-family: sans-serif;
+  margin: 1rem;
+}
+.layout {
+  display: flex;
+  gap: 1.5rem;
+}
+aside {
+  flex: 0 0 13rem;
+}
+main {
+  min-width: 0;
+  flex: 1;
+}
+nav a {
+  display: block;
+  margin: 0.4rem 0;
+}
+.active {
+  font-weight: bold;
+}
+fieldset {
+  margin: 0.75rem 0;
+}
+.field,
+label {
+  margin: 0.4rem 0;
+}
+label {
+  display: inline-block;
+  min-width: 13rem;
+}
+input:not([type='checkbox']),
+select {
+  max-width: 100%;
+  min-width: 14rem;
+}
+button {
+  margin: 0.25rem;
+}
+.table-scroll {
+  overflow: auto;
+}
+table {
+  border-collapse: collapse;
+}
+th,
+td {
+  border: 1px solid #aaa;
+  padding: 0.35rem;
+  text-align: left;
+  vertical-align: top;
+}
+dd {
+  margin-bottom: 0.5rem;
+  overflow-wrap: anywhere;
+}
+pre[role='alert'] {
+  white-space: pre-wrap;
+}
+[role='alert'] {
+  color: #a00;
+}
+@media (max-width: 700px) {
+  .layout {
+    display: block;
+  }
+  label {
+    display: block;
+  }
+}

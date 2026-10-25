@@ -1,0 +1,532 @@
+[
+  {
+    "method": "GET",
+    "path": "/api/agencies",
+    "screen": "agencias"
+  },
+  {
+    "method": "POST",
+    "path": "/api/agencies",
+    "screen": "agencias"
+  },
+  {
+    "method": "PUT",
+    "path": "/api/agencies/{id}",
+    "screen": "agencias"
+  },
+  {
+    "method": "GET",
+    "path": "/api/agencies/{id}",
+    "screen": "agencias"
+  },
+  {
+    "method": "PUT",
+    "path": "/api/agencies/{id}/assignments",
+    "screen": "agencias"
+  },
+  {
+    "method": "GET",
+    "path": "/api/audit",
+    "screen": "auditoria"
+  },
+  {
+    "method": "GET",
+    "path": "/api/cash-registers",
+    "screen": "cajas"
+  },
+  {
+    "method": "POST",
+    "path": "/api/cash-registers",
+    "screen": "cajas"
+  },
+  {
+    "method": "PUT",
+    "path": "/api/cash-registers/{id}",
+    "screen": "cajas"
+  },
+  {
+    "method": "GET",
+    "path": "/api/cash-sessions",
+    "screen": "sesiones-caja"
+  },
+  {
+    "method": "GET",
+    "path": "/api/cash-sessions/{id}",
+    "screen": "sesiones-caja"
+  },
+  {
+    "method": "POST",
+    "path": "/api/cash-sessions",
+    "screen": "sesiones-caja"
+  },
+  {
+    "method": "POST",
+    "path": "/api/cash-sessions/{id}/close",
+    "screen": "sesiones-caja"
+  },
+  {
+    "method": "POST",
+    "path": "/api/cash-sessions/{id}/movements",
+    "screen": "sesiones-caja"
+  },
+  {
+    "method": "POST",
+    "path": "/api/sales/{id}/payments",
+    "screen": "sesiones-caja"
+  },
+  {
+    "method": "GET",
+    "path": "/api/configuration/catalogs/{catalog}",
+    "screen": "configuracion"
+  },
+  {
+    "method": "PUT",
+    "path": "/api/configuration/catalogs/{catalog}/{code}",
+    "screen": "configuracion"
+  },
+  {
+    "method": "GET",
+    "path": "/api/configuration/company",
+    "screen": "configuracion"
+  },
+  {
+    "method": "PUT",
+    "path": "/api/configuration/company",
+    "screen": "configuracion"
+  },
+  {
+    "method": "GET",
+    "path": "/api/configuration/geography/{level}",
+    "screen": "configuracion"
+  },
+  {
+    "method": "GET",
+    "path": "/api/dashboard",
+    "screen": "dashboard"
+  },
+  {
+    "method": "GET",
+    "path": "/api/deliveries/orders/{orderId}/plans",
+    "screen": "entregas"
+  },
+  {
+    "method": "GET",
+    "path": "/api/deliveries/plans/{id}/attempts",
+    "screen": "entregas"
+  },
+  {
+    "method": "GET",
+    "path": "/api/deliveries/attempts/{attemptId}/confirmation",
+    "screen": "entregas"
+  },
+  {
+    "method": "POST",
+    "path": "/api/deliveries/plans",
+    "screen": "entregas"
+  },
+  {
+    "method": "POST",
+    "path": "/api/deliveries/plans/{id}/dispatch",
+    "screen": "entregas"
+  },
+  {
+    "method": "POST",
+    "path": "/api/deliveries/plans/{id}/attempts",
+    "screen": "entregas"
+  },
+  {
+    "method": "POST",
+    "path": "/api/deliveries/plans/{id}/confirm",
+    "screen": "entregas"
+  },
+  {
+    "method": "POST",
+    "path": "/api/deliveries/plans/{id}/return",
+    "screen": "entregas"
+  },
+  {
+    "method": "GET",
+    "path": "/api/drivers",
+    "screen": "conductores"
+  },
+  {
+    "method": "POST",
+    "path": "/api/drivers",
+    "screen": "conductores"
+  },
+  {
+    "method": "PUT",
+    "path": "/api/drivers/{id}",
+    "screen": "conductores"
+  },
+  {
+    "method": "GET",
+    "path": "/api/orders",
+    "screen": "pedidos"
+  },
+  {
+    "method": "GET",
+    "path": "/api/orders/{id}",
+    "screen": "pedidos"
+  },
+  {
+    "method": "GET",
+    "path": "/api/orders/tracking/{trackingNumber}",
+    "screen": "pedidos"
+  },
+  {
+    "method": "POST",
+    "path": "/api/orders",
+    "screen": "pedidos"
+  },
+  {
+    "method": "PUT",
+    "path": "/api/orders/{id}",
+    "screen": "pedidos"
+  },
+  {
+    "method": "POST",
+    "path": "/api/orders/{id}/cancel",
+    "screen": "pedidos"
+  },
+  {
+    "method": "GET",
+    "path": "/api/purchase-orders",
+    "screen": "compras"
+  },
+  {
+    "method": "GET",
+    "path": "/api/purchase-orders/{id}",
+    "screen": "compras"
+  },
+  {
+    "method": "POST",
+    "path": "/api/purchase-orders",
+    "screen": "compras"
+  },
+  {
+    "method": "POST",
+    "path": "/api/purchase-orders/{id}/status",
+    "screen": "compras"
+  },
+  {
+    "method": "POST",
+    "path": "/api/purchase-orders/allocations",
+    "screen": "compras"
+  },
+  {
+    "method": "POST",
+    "path": "/api/purchase-orders/{id}/receipts",
+    "screen": "compras"
+  },
+  {
+    "method": "GET",
+    "path": "/api/purchase-requests",
+    "screen": "solicitudes"
+  },
+  {
+    "method": "GET",
+    "path": "/api/purchase-requests/{id}",
+    "screen": "solicitudes"
+  },
+  {
+    "method": "POST",
+    "path": "/api/purchase-requests",
+    "screen": "solicitudes"
+  },
+  {
+    "method": "POST",
+    "path": "/api/purchase-requests/{id}/status",
+    "screen": "solicitudes"
+  },
+  {
+    "method": "GET",
+    "path": "/api/suppliers",
+    "screen": "proveedores"
+  },
+  {
+    "method": "POST",
+    "path": "/api/suppliers",
+    "screen": "proveedores"
+  },
+  {
+    "method": "PUT",
+    "path": "/api/suppliers/{id}",
+    "screen": "proveedores"
+  },
+  {
+    "method": "GET",
+    "path": "/api/supplies",
+    "screen": "suministros"
+  },
+  {
+    "method": "POST",
+    "path": "/api/supplies",
+    "screen": "suministros"
+  },
+  {
+    "method": "PUT",
+    "path": "/api/supplies/{id}",
+    "screen": "suministros"
+  },
+  {
+    "method": "GET",
+    "path": "/api/routes",
+    "screen": "rutas"
+  },
+  {
+    "method": "POST",
+    "path": "/api/routes",
+    "screen": "rutas"
+  },
+  {
+    "method": "PUT",
+    "path": "/api/routes/{id}",
+    "screen": "rutas"
+  },
+  {
+    "method": "POST",
+    "path": "/api/quotations",
+    "screen": "cotizaciones"
+  },
+  {
+    "method": "GET",
+    "path": "/api/quotations/orders/{orderId}",
+    "screen": "cotizaciones"
+  },
+  {
+    "method": "GET",
+    "path": "/api/receipt-series",
+    "screen": "series"
+  },
+  {
+    "method": "POST",
+    "path": "/api/receipt-series",
+    "screen": "series"
+  },
+  {
+    "method": "PUT",
+    "path": "/api/receipt-series/{id}",
+    "screen": "series"
+  },
+  {
+    "method": "GET",
+    "path": "/api/sales",
+    "screen": "ventas"
+  },
+  {
+    "method": "GET",
+    "path": "/api/sales/{id}",
+    "screen": "ventas"
+  },
+  {
+    "method": "POST",
+    "path": "/api/sales",
+    "screen": "ventas"
+  },
+  {
+    "method": "POST",
+    "path": "/api/sales/{id}/void",
+    "screen": "ventas"
+  },
+  {
+    "method": "POST",
+    "path": "/api/sales/{id}/receipt",
+    "screen": "ventas"
+  },
+  {
+    "method": "GET",
+    "path": "/api/tariffs",
+    "screen": "tarifas"
+  },
+  {
+    "method": "POST",
+    "path": "/api/tariffs",
+    "screen": "tarifas"
+  },
+  {
+    "method": "PUT",
+    "path": "/api/tariffs/{id}",
+    "screen": "tarifas"
+  },
+  {
+    "method": "GET",
+    "path": "/api/trips",
+    "screen": "viajes"
+  },
+  {
+    "method": "POST",
+    "path": "/api/trips",
+    "screen": "viajes"
+  },
+  {
+    "method": "GET",
+    "path": "/api/trips/{id}/orders",
+    "screen": "viajes"
+  },
+  {
+    "method": "POST",
+    "path": "/api/trips/{id}/orders/{orderId}",
+    "screen": "viajes"
+  },
+  {
+    "method": "POST",
+    "path": "/api/trips/{id}/orders/{orderId}/unassign",
+    "screen": "viajes"
+  },
+  {
+    "method": "POST",
+    "path": "/api/trips/{id}/depart",
+    "screen": "viajes"
+  },
+  {
+    "method": "POST",
+    "path": "/api/trips/{id}/arrive",
+    "screen": "viajes"
+  },
+  {
+    "method": "POST",
+    "path": "/api/trips/{id}/cancel",
+    "screen": "viajes"
+  },
+  {
+    "method": "POST",
+    "path": "/api/auth/login",
+    "screen": "cuenta"
+  },
+  {
+    "method": "GET",
+    "path": "/api/auth/me",
+    "screen": "cuenta"
+  },
+  {
+    "method": "POST",
+    "path": "/api/auth/logout",
+    "screen": "cuenta"
+  },
+  {
+    "method": "PUT",
+    "path": "/api/auth/password",
+    "screen": "cuenta"
+  },
+  {
+    "method": "GET",
+    "path": "/api/permissions",
+    "screen": "permisos"
+  },
+  {
+    "method": "GET",
+    "path": "/api/roles",
+    "screen": "roles"
+  },
+  {
+    "method": "POST",
+    "path": "/api/roles",
+    "screen": "roles"
+  },
+  {
+    "method": "PUT",
+    "path": "/api/roles/{id}",
+    "screen": "roles"
+  },
+  {
+    "method": "GET",
+    "path": "/api/users",
+    "screen": "usuarios"
+  },
+  {
+    "method": "GET",
+    "path": "/api/users/{id}",
+    "screen": "usuarios"
+  },
+  {
+    "method": "POST",
+    "path": "/api/users",
+    "screen": "usuarios"
+  },
+  {
+    "method": "PUT",
+    "path": "/api/users/{id}",
+    "screen": "usuarios"
+  },
+  {
+    "method": "PUT",
+    "path": "/api/users/{id}/roles",
+    "screen": "usuarios"
+  },
+  {
+    "method": "GET",
+    "path": "/api/vehicles",
+    "screen": "vehiculos"
+  },
+  {
+    "method": "POST",
+    "path": "/api/vehicles",
+    "screen": "vehiculos"
+  },
+  {
+    "method": "PUT",
+    "path": "/api/vehicles/{id}",
+    "screen": "vehiculos"
+  },
+  {
+    "method": "GET",
+    "path": "/api/warehouse/stock",
+    "screen": "recepcion"
+  },
+  {
+    "method": "GET",
+    "path": "/api/warehouse/packages/{packageId}/movements",
+    "screen": "recepcion"
+  },
+  {
+    "method": "POST",
+    "path": "/api/warehouse/orders/{id}/receive",
+    "screen": "recepcion"
+  },
+  {
+    "method": "POST",
+    "path": "/api/warehouse/orders/{orderId}/packages/{packageId}/move",
+    "screen": "recepcion"
+  },
+  {
+    "method": "GET",
+    "path": "/api/warehouse-locations",
+    "screen": "ubicaciones"
+  },
+  {
+    "method": "POST",
+    "path": "/api/warehouse-locations",
+    "screen": "ubicaciones"
+  },
+  {
+    "method": "PUT",
+    "path": "/api/warehouse-locations/{id}",
+    "screen": "ubicaciones"
+  },
+  {
+    "method": "GET",
+    "path": "/api/warehouses",
+    "screen": "almacenes"
+  },
+  {
+    "method": "POST",
+    "path": "/api/warehouses",
+    "screen": "almacenes"
+  },
+  {
+    "method": "PUT",
+    "path": "/api/warehouses/{id}",
+    "screen": "almacenes"
+  },
+  {
+    "method": "GET",
+    "path": "/health/live",
+    "screen": "login"
+  },
+  {
+    "method": "GET",
+    "path": "/health/ready",
+    "screen": "dashboard"
+  }
+]
