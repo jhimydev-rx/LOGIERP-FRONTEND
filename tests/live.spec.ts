@@ -1,8 +1,6 @@
 import { test, expect } from '@playwright/test';
 
-test('Flujo real: login, dashboard, proveedor, pedido anidado y error de negocio', async ({
-  page,
-}) => {
+test('Flujo real: proveedores, pedidos, movimientos y cierre de caja', async ({ page }) => {
   test.skip(
     !process.env['LOGIERP_API_URL'],
     'Ejecutar con scripts/test-live.py para usar una base temporal.',
@@ -29,8 +27,8 @@ test('Flujo real: login, dashboard, proveedor, pedido anidado y error de negocio
   await page.getByLabel('RUC', { exact: true }).fill('20999888777');
   await page.getByLabel('Razón social', { exact: true }).fill('Proveedor creado desde Angular');
   await page.locator('form button[type=submit]').click();
-  await expect(page.getByRole('status')).toContainText('Operación completada');
-  await page.getByRole('button', { name: 'Usar este registro', exact: true }).click();
+  await expect(page.getByRole('status').filter({hasText:'Operación completada'})).toContainText('Operación completada');
+  await expect(page.getByRole('region', { name: 'Registro seleccionado' })).toBeVisible();
   await page
     .getByRole('navigation', { name: 'Operaciones' })
     .getByRole('button', { name: 'Editar', exact: true })
@@ -40,7 +38,7 @@ test('Flujo real: login, dashboard, proveedor, pedido anidado y error de negocio
   );
   await page.getByLabel('Razón social', { exact: true }).fill('Proveedor editado desde Angular');
   await page.locator('form button[type=submit]').click();
-  await expect(page.getByRole('status')).toContainText('Operación completada');
+  await expect(page.getByRole('status').filter({hasText:'Operación completada'})).toContainText('Operación completada');
   // Exercise UUID relationships and nested package/remitter forms through actual HTTP.
   const token = await page.evaluate(() => sessionStorage.getItem('logierp.session'));
   const response = await page.request.get(backend + '/api/agencies?pageSize=100', {
@@ -69,14 +67,14 @@ test('Flujo real: login, dashboard, proveedor, pedido anidado y error de negocio
   await page.locator('#body-packages-0-weightKg').fill('3');
   await page.locator('#body-packages-0-declaredValue').fill('10');
   await page.locator('form button[type=submit]').click();
-  await expect(page.getByRole('status')).toContainText('Operación completada');
-  await expect(page.getByText('REGISTERED', { exact: true }).first()).toBeVisible();
-  await page.getByRole('button', { name: 'Usar este registro', exact: true }).click();
+  await expect(page.getByRole('status').filter({hasText:'Operación completada'})).toContainText('Operación completada');
+  await expect(page.getByText('Registrado', { exact: true }).first()).toBeVisible();
+  await expect(page.getByRole('region', { name: 'Registro seleccionado' })).toBeVisible();
   await page
     .getByRole('navigation', { name: 'Operaciones' })
     .getByRole('button', { name: 'Editar', exact: true })
     .click();
-  await expect(page.getByRole('heading', {name:'Editar', exact:true})).toBeVisible();
+  await expect(page.getByRole('heading', { name: 'Editar', exact: true })).toBeVisible();
   await expect(page.locator('#body-packages-0-description')).toHaveValue('Paquete desde Angular');
   await expect(page.locator('#body-packages-0-weightKg')).toHaveValue('3');
   await page.locator('#body-packages-0-weightKg').fill('-1');
@@ -84,6 +82,49 @@ test('Flujo real: login, dashboard, proveedor, pedido anidado y error de negocio
   await expect(page.locator('#body-packages-0-weightKg')).toHaveValue('-1');
   await page.locator('form button[type=submit]').click();
   await expect(page.getByRole('alert')).toContainText('WeightKg');
+  // Operate a real open session in the disposable fixture database.
+  const sessionsResponse = await page.request.get(backend + '/api/cash-sessions', {
+    headers: { Authorization: 'Bearer ' + token },
+  });
+  const sessions = await sessionsResponse.json();
+  const active = sessions.find((entry: any) => !entry.closedAt);
+  expect(active).toBeTruthy();
+  await page.goto('/modulos/sesiones-caja');
+  const cash = page.getByRole('region', { name: 'Registro seleccionado' });
+  await expect(cash.getByText('Sesión abierta', { exact: true })).toBeVisible();
+  await cash.getByRole('button', { name: 'Registrar movimiento', exact: true }).click();
+  await page.getByLabel('Concepto', { exact: true }).selectOption('OTHER_INCOME');
+  await page.getByLabel('Medio de pago', { exact: true }).selectOption('CASH');
+  await page.getByLabel('Importe (PEN)', { exact: true }).fill('9');
+  await page.getByLabel('Descripción', { exact: true }).fill('Ingreso de prueba de caja');
+  await page
+    .getByRole('region', { name: 'Acción en curso' })
+    .getByRole('button', { name: 'Registrar movimiento', exact: true })
+    .click();
+  await expect(page.getByRole('status').filter({hasText:'Operación completada'})).toContainText('Operación completada');
+  const updatedResponse = await page.request.get(backend + '/api/cash-sessions/' + active.id, {
+    headers: { Authorization: 'Bearer ' + token },
+  });
+  const updated = await updatedResponse.json();
+  expect(updated.expectedCashAmount).toBe(active.expectedCashAmount + 9);
+  await cash.getByRole('button', { name: 'Cerrar caja', exact: true }).click();
+  await page
+    .getByLabel('Efectivo contado (PEN)', { exact: true })
+    .fill(String(updated.expectedCashAmount));
+  page.once('dialog', (dialog) => dialog.accept());
+  await page
+    .getByRole('region', { name: 'Acción en curso' })
+    .getByRole('button', { name: 'Cerrar caja', exact: true })
+    .click();
+  await expect(cash.getByText('Sesión cerrada', { exact: true })).toBeVisible();
+  await page.goto('/reportes');
+  await page.getByLabel('Reporte', { exact: true }).selectOption('sales');
+  const fileEvent = page.waitForEvent('download');
+  await page.getByRole('button', { name: 'Descargar Excel', exact: true }).click();
+  const file = await fileEvent;
+  expect(file.suggestedFilename()).toMatch(/^Ventas_.*\.xlsx$/);
+  expect(await file.failure()).toBeNull();
+  await expect(page.getByRole('status')).toContainText('Archivo Excel descargado');
   await page.getByRole('button', { name: 'Cerrar sesión', exact: true }).first().click();
   await expect(page).toHaveURL(/login/);
   expect(errors).toEqual([]);

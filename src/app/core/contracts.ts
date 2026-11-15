@@ -19,6 +19,7 @@ export interface Parameter {
 }
 export interface Operation {
   key: string;
+  download?: boolean;
   method: string;
   path: string;
   module: string;

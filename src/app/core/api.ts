@@ -44,6 +44,43 @@ export const authInterceptor: HttpInterceptorFn = (request, next) => {
 @Injectable({ providedIn: 'root' })
 export class Api {
   private http = inject(HttpClient);
+  async download(path: string): Promise<void> {
+    let response;
+    try {
+      response = await firstValueFrom(
+        this.http.get(path, { observe: 'response', responseType: 'blob' }),
+      );
+    } catch (error) {
+      if (error instanceof HttpErrorResponse && error.error instanceof Blob) {
+        try {
+          const detail = JSON.parse(await error.error.text());
+          throw new Error(detail.message ?? detail.title ?? 'No se pudo descargar el archivo.');
+        } catch (decoded) {
+          if (decoded instanceof Error && !(decoded instanceof SyntaxError)) throw decoded;
+        }
+      }
+      throw error;
+    }
+    if (!response.body) throw new Error('El archivo todavía no está disponible.');
+    const disposition = response.headers.get('Content-Disposition') ?? '';
+    const encoded = disposition.match(/filename\*=UTF-8''([^;]+)/i)?.[1];
+    const plain = disposition.match(/filename="?([^";]+)"?/i)?.[1];
+    let name = path.startsWith('/api/reports/') ? 'reporte.xlsx' : path.endsWith('/cdr') ? 'constancia-cdr.zip' : 'comprobante.xml';
+    try {
+      name = encoded ? decodeURIComponent(encoded) : plain || name;
+    } catch {
+      /* Keep safe fallback name. */
+    }
+    name = name.replace(/[\\/\x00-\x1f]/g, '_');
+    const url = URL.createObjectURL(response.body);
+    const anchor = document.createElement('a');
+    anchor.href = url;
+    anchor.download = name;
+    document.body.appendChild(anchor);
+    anchor.click();
+    anchor.remove();
+    setTimeout(() => URL.revokeObjectURL(url), 1000);
+  }
   request<T = unknown>(
     method: string,
     path: string,

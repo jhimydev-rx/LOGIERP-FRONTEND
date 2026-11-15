@@ -27,6 +27,7 @@ export const routes: Routes = [
     canActivate: [authenticated],
     loadComponent: () => import('./pages/workspace').then((m) => m.Workspace),
   },
+  { path: 'reportes', canActivate: [authenticated], loadComponent: () => import('./pages/reports').then(m => m.Reports) },
   { path: '', pathMatch: 'full', redirectTo: 'dashboard' },
   { path: '**', redirectTo: 'dashboard' },
 ];

@@ -2,531 +2,693 @@
   {
     "method": "GET",
     "path": "/api/agencies",
-    "screen": "agencias"
+    "module": "agencias",
+    "title": "Listar"
   },
   {
     "method": "POST",
     "path": "/api/agencies",
-    "screen": "agencias"
+    "module": "agencias",
+    "title": "Registrar"
   },
   {
     "method": "PUT",
     "path": "/api/agencies/{id}",
-    "screen": "agencias"
+    "module": "agencias",
+    "title": "Editar"
   },
   {
     "method": "GET",
     "path": "/api/agencies/{id}",
-    "screen": "agencias"
+    "module": "agencias",
+    "title": "Consultar detalle"
   },
   {
     "method": "PUT",
     "path": "/api/agencies/{id}/assignments",
-    "screen": "agencias"
+    "module": "agencias",
+    "title": "Horarios y responsables"
   },
   {
     "method": "GET",
     "path": "/api/audit",
-    "screen": "auditoria"
-  },
-  {
-    "method": "GET",
-    "path": "/api/cash-registers",
-    "screen": "cajas"
-  },
-  {
-    "method": "POST",
-    "path": "/api/cash-registers",
-    "screen": "cajas"
-  },
-  {
-    "method": "PUT",
-    "path": "/api/cash-registers/{id}",
-    "screen": "cajas"
-  },
-  {
-    "method": "GET",
-    "path": "/api/cash-sessions",
-    "screen": "sesiones-caja"
-  },
-  {
-    "method": "GET",
-    "path": "/api/cash-sessions/{id}",
-    "screen": "sesiones-caja"
-  },
-  {
-    "method": "POST",
-    "path": "/api/cash-sessions",
-    "screen": "sesiones-caja"
-  },
-  {
-    "method": "POST",
-    "path": "/api/cash-sessions/{id}/close",
-    "screen": "sesiones-caja"
-  },
-  {
-    "method": "POST",
-    "path": "/api/cash-sessions/{id}/movements",
-    "screen": "sesiones-caja"
-  },
-  {
-    "method": "POST",
-    "path": "/api/sales/{id}/payments",
-    "screen": "sesiones-caja"
-  },
-  {
-    "method": "GET",
-    "path": "/api/configuration/catalogs/{catalog}",
-    "screen": "configuracion"
-  },
-  {
-    "method": "PUT",
-    "path": "/api/configuration/catalogs/{catalog}/{code}",
-    "screen": "configuracion"
-  },
-  {
-    "method": "GET",
-    "path": "/api/configuration/company",
-    "screen": "configuracion"
-  },
-  {
-    "method": "PUT",
-    "path": "/api/configuration/company",
-    "screen": "configuracion"
-  },
-  {
-    "method": "GET",
-    "path": "/api/configuration/geography/{level}",
-    "screen": "configuracion"
-  },
-  {
-    "method": "GET",
-    "path": "/api/dashboard",
-    "screen": "dashboard"
-  },
-  {
-    "method": "GET",
-    "path": "/api/deliveries/orders/{orderId}/plans",
-    "screen": "entregas"
-  },
-  {
-    "method": "GET",
-    "path": "/api/deliveries/plans/{id}/attempts",
-    "screen": "entregas"
-  },
-  {
-    "method": "GET",
-    "path": "/api/deliveries/attempts/{attemptId}/confirmation",
-    "screen": "entregas"
-  },
-  {
-    "method": "POST",
-    "path": "/api/deliveries/plans",
-    "screen": "entregas"
-  },
-  {
-    "method": "POST",
-    "path": "/api/deliveries/plans/{id}/dispatch",
-    "screen": "entregas"
-  },
-  {
-    "method": "POST",
-    "path": "/api/deliveries/plans/{id}/attempts",
-    "screen": "entregas"
-  },
-  {
-    "method": "POST",
-    "path": "/api/deliveries/plans/{id}/confirm",
-    "screen": "entregas"
-  },
-  {
-    "method": "POST",
-    "path": "/api/deliveries/plans/{id}/return",
-    "screen": "entregas"
-  },
-  {
-    "method": "GET",
-    "path": "/api/drivers",
-    "screen": "conductores"
-  },
-  {
-    "method": "POST",
-    "path": "/api/drivers",
-    "screen": "conductores"
-  },
-  {
-    "method": "PUT",
-    "path": "/api/drivers/{id}",
-    "screen": "conductores"
-  },
-  {
-    "method": "GET",
-    "path": "/api/orders",
-    "screen": "pedidos"
-  },
-  {
-    "method": "GET",
-    "path": "/api/orders/{id}",
-    "screen": "pedidos"
-  },
-  {
-    "method": "GET",
-    "path": "/api/orders/tracking/{trackingNumber}",
-    "screen": "pedidos"
-  },
-  {
-    "method": "POST",
-    "path": "/api/orders",
-    "screen": "pedidos"
-  },
-  {
-    "method": "PUT",
-    "path": "/api/orders/{id}",
-    "screen": "pedidos"
-  },
-  {
-    "method": "POST",
-    "path": "/api/orders/{id}/cancel",
-    "screen": "pedidos"
-  },
-  {
-    "method": "GET",
-    "path": "/api/purchase-orders",
-    "screen": "compras"
-  },
-  {
-    "method": "GET",
-    "path": "/api/purchase-orders/{id}",
-    "screen": "compras"
-  },
-  {
-    "method": "POST",
-    "path": "/api/purchase-orders",
-    "screen": "compras"
-  },
-  {
-    "method": "POST",
-    "path": "/api/purchase-orders/{id}/status",
-    "screen": "compras"
-  },
-  {
-    "method": "POST",
-    "path": "/api/purchase-orders/allocations",
-    "screen": "compras"
-  },
-  {
-    "method": "POST",
-    "path": "/api/purchase-orders/{id}/receipts",
-    "screen": "compras"
-  },
-  {
-    "method": "GET",
-    "path": "/api/purchase-requests",
-    "screen": "solicitudes"
-  },
-  {
-    "method": "GET",
-    "path": "/api/purchase-requests/{id}",
-    "screen": "solicitudes"
-  },
-  {
-    "method": "POST",
-    "path": "/api/purchase-requests",
-    "screen": "solicitudes"
-  },
-  {
-    "method": "POST",
-    "path": "/api/purchase-requests/{id}/status",
-    "screen": "solicitudes"
-  },
-  {
-    "method": "GET",
-    "path": "/api/suppliers",
-    "screen": "proveedores"
-  },
-  {
-    "method": "POST",
-    "path": "/api/suppliers",
-    "screen": "proveedores"
-  },
-  {
-    "method": "PUT",
-    "path": "/api/suppliers/{id}",
-    "screen": "proveedores"
-  },
-  {
-    "method": "GET",
-    "path": "/api/supplies",
-    "screen": "suministros"
-  },
-  {
-    "method": "POST",
-    "path": "/api/supplies",
-    "screen": "suministros"
-  },
-  {
-    "method": "PUT",
-    "path": "/api/supplies/{id}",
-    "screen": "suministros"
-  },
-  {
-    "method": "GET",
-    "path": "/api/routes",
-    "screen": "rutas"
-  },
-  {
-    "method": "POST",
-    "path": "/api/routes",
-    "screen": "rutas"
-  },
-  {
-    "method": "PUT",
-    "path": "/api/routes/{id}",
-    "screen": "rutas"
-  },
-  {
-    "method": "POST",
-    "path": "/api/quotations",
-    "screen": "cotizaciones"
-  },
-  {
-    "method": "GET",
-    "path": "/api/quotations/orders/{orderId}",
-    "screen": "cotizaciones"
-  },
-  {
-    "method": "GET",
-    "path": "/api/receipt-series",
-    "screen": "series"
-  },
-  {
-    "method": "POST",
-    "path": "/api/receipt-series",
-    "screen": "series"
-  },
-  {
-    "method": "PUT",
-    "path": "/api/receipt-series/{id}",
-    "screen": "series"
-  },
-  {
-    "method": "GET",
-    "path": "/api/sales",
-    "screen": "ventas"
-  },
-  {
-    "method": "GET",
-    "path": "/api/sales/{id}",
-    "screen": "ventas"
-  },
-  {
-    "method": "POST",
-    "path": "/api/sales",
-    "screen": "ventas"
-  },
-  {
-    "method": "POST",
-    "path": "/api/sales/{id}/void",
-    "screen": "ventas"
-  },
-  {
-    "method": "POST",
-    "path": "/api/sales/{id}/receipt",
-    "screen": "ventas"
-  },
-  {
-    "method": "GET",
-    "path": "/api/tariffs",
-    "screen": "tarifas"
-  },
-  {
-    "method": "POST",
-    "path": "/api/tariffs",
-    "screen": "tarifas"
-  },
-  {
-    "method": "PUT",
-    "path": "/api/tariffs/{id}",
-    "screen": "tarifas"
-  },
-  {
-    "method": "GET",
-    "path": "/api/trips",
-    "screen": "viajes"
-  },
-  {
-    "method": "POST",
-    "path": "/api/trips",
-    "screen": "viajes"
-  },
-  {
-    "method": "GET",
-    "path": "/api/trips/{id}/orders",
-    "screen": "viajes"
-  },
-  {
-    "method": "POST",
-    "path": "/api/trips/{id}/orders/{orderId}",
-    "screen": "viajes"
-  },
-  {
-    "method": "POST",
-    "path": "/api/trips/{id}/orders/{orderId}/unassign",
-    "screen": "viajes"
-  },
-  {
-    "method": "POST",
-    "path": "/api/trips/{id}/depart",
-    "screen": "viajes"
-  },
-  {
-    "method": "POST",
-    "path": "/api/trips/{id}/arrive",
-    "screen": "viajes"
-  },
-  {
-    "method": "POST",
-    "path": "/api/trips/{id}/cancel",
-    "screen": "viajes"
+    "module": "auditoria",
+    "title": "Listar"
   },
   {
     "method": "POST",
     "path": "/api/auth/login",
-    "screen": "cuenta"
+    "module": "cuenta",
+    "title": "Login"
   },
   {
     "method": "GET",
     "path": "/api/auth/me",
-    "screen": "cuenta"
+    "module": "cuenta",
+    "title": "Mi sesión"
   },
   {
     "method": "POST",
     "path": "/api/auth/logout",
-    "screen": "cuenta"
+    "module": "cuenta",
+    "title": "Cerrar sesión"
   },
   {
     "method": "PUT",
     "path": "/api/auth/password",
-    "screen": "cuenta"
+    "module": "cuenta",
+    "title": "Cambiar contraseña"
+  },
+  {
+    "method": "GET",
+    "path": "/api/cash-registers",
+    "module": "cajas",
+    "title": "Listar"
+  },
+  {
+    "method": "POST",
+    "path": "/api/cash-registers",
+    "module": "cajas",
+    "title": "Registrar"
+  },
+  {
+    "method": "PUT",
+    "path": "/api/cash-registers/{id}",
+    "module": "cajas",
+    "title": "Editar"
+  },
+  {
+    "method": "GET",
+    "path": "/api/cash-sessions",
+    "module": "sesiones-caja",
+    "title": "Listar"
+  },
+  {
+    "method": "POST",
+    "path": "/api/cash-sessions",
+    "module": "sesiones-caja",
+    "title": "Abrir caja"
+  },
+  {
+    "method": "GET",
+    "path": "/api/cash-sessions/{id}",
+    "module": "sesiones-caja",
+    "title": "Consultar detalle"
+  },
+  {
+    "method": "POST",
+    "path": "/api/cash-sessions/{id}/close",
+    "module": "sesiones-caja",
+    "title": "Cerrar caja"
+  },
+  {
+    "method": "POST",
+    "path": "/api/cash-sessions/{id}/movements",
+    "module": "sesiones-caja",
+    "title": "Registrar movimiento"
+  },
+  {
+    "method": "POST",
+    "path": "/api/sales/{id}/payments",
+    "module": "sesiones-caja",
+    "title": "Cobrar venta"
+  },
+  {
+    "method": "GET",
+    "path": "/api/configuration/catalogs/{catalog}",
+    "module": "configuracion",
+    "title": "Consultar catálogo"
+  },
+  {
+    "method": "PUT",
+    "path": "/api/configuration/catalogs/{catalog}/{code}",
+    "module": "configuracion",
+    "title": "Guardar catálogo"
+  },
+  {
+    "method": "GET",
+    "path": "/api/configuration/company",
+    "module": "configuracion",
+    "title": "Consultar empresa"
+  },
+  {
+    "method": "PUT",
+    "path": "/api/configuration/company",
+    "module": "configuracion",
+    "title": "Guardar empresa"
+  },
+  {
+    "method": "GET",
+    "path": "/api/configuration/geography/{level}",
+    "module": "configuracion",
+    "title": "Consultar geografía"
+  },
+  {
+    "method": "GET",
+    "path": "/api/dashboard",
+    "module": "dashboard",
+    "title": "Consultar"
+  },
+  {
+    "method": "GET",
+    "path": "/api/deliveries/orders/{orderId}/plans",
+    "module": "entregas",
+    "title": "Consultar programaciones"
+  },
+  {
+    "method": "GET",
+    "path": "/api/deliveries/plans/{id}/attempts",
+    "module": "entregas",
+    "title": "Consultar intentos"
+  },
+  {
+    "method": "POST",
+    "path": "/api/deliveries/plans/{id}/attempts",
+    "module": "entregas",
+    "title": "Registrar intento fallido"
+  },
+  {
+    "method": "GET",
+    "path": "/api/deliveries/attempts/{attemptId}/confirmation",
+    "module": "entregas",
+    "title": "Consultar constancia"
+  },
+  {
+    "method": "POST",
+    "path": "/api/deliveries/plans",
+    "module": "entregas",
+    "title": "Programar entrega"
+  },
+  {
+    "method": "POST",
+    "path": "/api/deliveries/plans/{id}/dispatch",
+    "module": "entregas",
+    "title": "Salir a reparto"
+  },
+  {
+    "method": "POST",
+    "path": "/api/deliveries/plans/{id}/confirm",
+    "module": "entregas",
+    "title": "Confirmar entrega"
+  },
+  {
+    "method": "POST",
+    "path": "/api/deliveries/plans/{id}/return",
+    "module": "entregas",
+    "title": "Retornar a agencia"
+  },
+  {
+    "method": "GET",
+    "path": "/api/drivers",
+    "module": "conductores",
+    "title": "Listar"
+  },
+  {
+    "method": "POST",
+    "path": "/api/drivers",
+    "module": "conductores",
+    "title": "Registrar"
+  },
+  {
+    "method": "PUT",
+    "path": "/api/drivers/{id}",
+    "module": "conductores",
+    "title": "Editar"
+  },
+  {
+    "method": "GET",
+    "path": "/api/orders",
+    "module": "pedidos",
+    "title": "Listar"
+  },
+  {
+    "method": "POST",
+    "path": "/api/orders",
+    "module": "pedidos",
+    "title": "Registrar"
+  },
+  {
+    "method": "GET",
+    "path": "/api/orders/{id}",
+    "module": "pedidos",
+    "title": "Consultar detalle"
+  },
+  {
+    "method": "PUT",
+    "path": "/api/orders/{id}",
+    "module": "pedidos",
+    "title": "Editar"
+  },
+  {
+    "method": "GET",
+    "path": "/api/orders/tracking/{trackingNumber}",
+    "module": "pedidos",
+    "title": "Seguimiento por guía"
+  },
+  {
+    "method": "POST",
+    "path": "/api/orders/{id}/cancel",
+    "module": "pedidos",
+    "title": "Cancelar"
   },
   {
     "method": "GET",
     "path": "/api/permissions",
-    "screen": "permisos"
+    "module": "permisos",
+    "title": "Listar"
+  },
+  {
+    "method": "GET",
+    "path": "/api/purchase-orders",
+    "module": "compras",
+    "title": "Listar"
+  },
+  {
+    "method": "POST",
+    "path": "/api/purchase-orders",
+    "module": "compras",
+    "title": "Registrar"
+  },
+  {
+    "method": "GET",
+    "path": "/api/purchase-orders/{id}",
+    "module": "compras",
+    "title": "Consultar detalle"
+  },
+  {
+    "method": "POST",
+    "path": "/api/purchase-orders/{id}/status",
+    "module": "compras",
+    "title": "Cambiar estado"
+  },
+  {
+    "method": "POST",
+    "path": "/api/purchase-orders/allocations",
+    "module": "compras",
+    "title": "Vincular solicitud"
+  },
+  {
+    "method": "POST",
+    "path": "/api/purchase-orders/{id}/receipts",
+    "module": "compras",
+    "title": "Registrar recepción"
+  },
+  {
+    "method": "GET",
+    "path": "/api/purchase-requests",
+    "module": "solicitudes",
+    "title": "Listar"
+  },
+  {
+    "method": "POST",
+    "path": "/api/purchase-requests",
+    "module": "solicitudes",
+    "title": "Registrar"
+  },
+  {
+    "method": "GET",
+    "path": "/api/purchase-requests/{id}",
+    "module": "solicitudes",
+    "title": "Consultar detalle"
+  },
+  {
+    "method": "POST",
+    "path": "/api/purchase-requests/{id}/status",
+    "module": "solicitudes",
+    "title": "Cambiar estado"
+  },
+  {
+    "method": "POST",
+    "path": "/api/quotations",
+    "module": "cotizaciones",
+    "title": "Registrar"
+  },
+  {
+    "method": "GET",
+    "path": "/api/quotations/orders/{orderId}",
+    "module": "cotizaciones",
+    "title": "Cotizaciones del pedido"
+  },
+  {
+    "method": "GET",
+    "path": "/api/receipt-series",
+    "module": "series",
+    "title": "Listar"
+  },
+  {
+    "method": "POST",
+    "path": "/api/receipt-series",
+    "module": "series",
+    "title": "Registrar"
+  },
+  {
+    "method": "PUT",
+    "path": "/api/receipt-series/{id}",
+    "module": "series",
+    "title": "Editar"
+  },
+  {
+    "method": "GET",
+    "path": "/api/reports/sales",
+    "module": "ventas",
+    "title": "Exportar ventas Excel"
+  },
+  {
+    "method": "GET",
+    "path": "/api/reports/cash",
+    "module": "sesiones-caja",
+    "title": "Exportar caja Excel"
+  },
+  {
+    "method": "GET",
+    "path": "/api/reports/purchases",
+    "module": "compras",
+    "title": "Exportar compras Excel"
   },
   {
     "method": "GET",
     "path": "/api/roles",
-    "screen": "roles"
+    "module": "roles",
+    "title": "Listar"
   },
   {
     "method": "POST",
     "path": "/api/roles",
-    "screen": "roles"
+    "module": "roles",
+    "title": "Registrar"
   },
   {
     "method": "PUT",
     "path": "/api/roles/{id}",
-    "screen": "roles"
+    "module": "roles",
+    "title": "Editar"
+  },
+  {
+    "method": "GET",
+    "path": "/api/routes",
+    "module": "rutas",
+    "title": "Listar"
+  },
+  {
+    "method": "POST",
+    "path": "/api/routes",
+    "module": "rutas",
+    "title": "Registrar"
+  },
+  {
+    "method": "PUT",
+    "path": "/api/routes/{id}",
+    "module": "rutas",
+    "title": "Editar"
+  },
+  {
+    "method": "GET",
+    "path": "/api/sales",
+    "module": "ventas",
+    "title": "Listar"
+  },
+  {
+    "method": "POST",
+    "path": "/api/sales",
+    "module": "ventas",
+    "title": "Registrar"
+  },
+  {
+    "method": "GET",
+    "path": "/api/sales/{id}",
+    "module": "ventas",
+    "title": "Consultar detalle"
+  },
+  {
+    "method": "POST",
+    "path": "/api/sales/{id}/void",
+    "module": "ventas",
+    "title": "Anular venta"
+  },
+  {
+    "method": "POST",
+    "path": "/api/sales/{id}/receipt",
+    "module": "ventas",
+    "title": "Emitir comprobante"
+  },
+  {
+    "method": "POST",
+    "path": "/api/sunat-beta/invoices",
+    "module": "sunat",
+    "title": "Preparar comprobante"
+  },
+  {
+    "method": "GET",
+    "path": "/api/sunat-beta/invoices",
+    "module": "sunat",
+    "title": "Listar"
+  },
+  {
+    "method": "POST",
+    "path": "/api/sunat-beta/invoices/{id}/send",
+    "module": "sunat",
+    "title": "Enviar a SUNAT beta"
+  },
+  {
+    "method": "GET",
+    "path": "/api/sunat-beta/invoices/{id}",
+    "module": "sunat",
+    "title": "Consultar detalle"
+  },
+  {
+    "method": "GET",
+    "path": "/api/sunat-beta/invoices/{id}/attempts",
+    "module": "sunat",
+    "title": "Consultar intentos"
+  },
+  {
+    "method": "GET",
+    "path": "/api/sunat-beta/invoices/{id}/xml",
+    "module": "sunat",
+    "title": "Descargar XML"
+  },
+  {
+    "method": "GET",
+    "path": "/api/sunat-beta/invoices/{id}/cdr",
+    "module": "sunat",
+    "title": "Descargar CDR"
+  },
+  {
+    "method": "GET",
+    "path": "/api/suppliers",
+    "module": "proveedores",
+    "title": "Listar"
+  },
+  {
+    "method": "POST",
+    "path": "/api/suppliers",
+    "module": "proveedores",
+    "title": "Registrar"
+  },
+  {
+    "method": "PUT",
+    "path": "/api/suppliers/{id}",
+    "module": "proveedores",
+    "title": "Editar"
+  },
+  {
+    "method": "GET",
+    "path": "/api/supplies",
+    "module": "suministros",
+    "title": "Listar"
+  },
+  {
+    "method": "POST",
+    "path": "/api/supplies",
+    "module": "suministros",
+    "title": "Registrar"
+  },
+  {
+    "method": "PUT",
+    "path": "/api/supplies/{id}",
+    "module": "suministros",
+    "title": "Editar"
+  },
+  {
+    "method": "GET",
+    "path": "/api/tariffs",
+    "module": "tarifas",
+    "title": "Listar"
+  },
+  {
+    "method": "POST",
+    "path": "/api/tariffs",
+    "module": "tarifas",
+    "title": "Registrar"
+  },
+  {
+    "method": "PUT",
+    "path": "/api/tariffs/{id}",
+    "module": "tarifas",
+    "title": "Editar"
+  },
+  {
+    "method": "GET",
+    "path": "/api/trips",
+    "module": "viajes",
+    "title": "Listar"
+  },
+  {
+    "method": "POST",
+    "path": "/api/trips",
+    "module": "viajes",
+    "title": "Registrar"
+  },
+  {
+    "method": "GET",
+    "path": "/api/trips/{id}/orders",
+    "module": "viajes",
+    "title": "Consultar pedidos del viaje"
+  },
+  {
+    "method": "POST",
+    "path": "/api/trips/{id}/orders/{orderId}",
+    "module": "viajes",
+    "title": "Asignar pedido al viaje"
+  },
+  {
+    "method": "POST",
+    "path": "/api/trips/{id}/orders/{orderId}/unassign",
+    "module": "viajes",
+    "title": "Desasignar pedido"
+  },
+  {
+    "method": "POST",
+    "path": "/api/trips/{id}/depart",
+    "module": "viajes",
+    "title": "Registrar salida"
+  },
+  {
+    "method": "POST",
+    "path": "/api/trips/{id}/arrive",
+    "module": "viajes",
+    "title": "Registrar llegada"
+  },
+  {
+    "method": "POST",
+    "path": "/api/trips/{id}/cancel",
+    "module": "viajes",
+    "title": "Cancelar"
   },
   {
     "method": "GET",
     "path": "/api/users",
-    "screen": "usuarios"
-  },
-  {
-    "method": "GET",
-    "path": "/api/users/{id}",
-    "screen": "usuarios"
+    "module": "usuarios",
+    "title": "Listar"
   },
   {
     "method": "POST",
     "path": "/api/users",
-    "screen": "usuarios"
+    "module": "usuarios",
+    "title": "Registrar"
+  },
+  {
+    "method": "GET",
+    "path": "/api/users/{id}",
+    "module": "usuarios",
+    "title": "Consultar detalle"
   },
   {
     "method": "PUT",
     "path": "/api/users/{id}",
-    "screen": "usuarios"
+    "module": "usuarios",
+    "title": "Editar"
   },
   {
     "method": "PUT",
     "path": "/api/users/{id}/roles",
-    "screen": "usuarios"
+    "module": "usuarios",
+    "title": "Asignar roles"
   },
   {
     "method": "GET",
     "path": "/api/vehicles",
-    "screen": "vehiculos"
+    "module": "vehiculos",
+    "title": "Listar"
   },
   {
     "method": "POST",
     "path": "/api/vehicles",
-    "screen": "vehiculos"
+    "module": "vehiculos",
+    "title": "Registrar"
   },
   {
     "method": "PUT",
     "path": "/api/vehicles/{id}",
-    "screen": "vehiculos"
-  },
-  {
-    "method": "GET",
-    "path": "/api/warehouse/stock",
-    "screen": "recepcion"
-  },
-  {
-    "method": "GET",
-    "path": "/api/warehouse/packages/{packageId}/movements",
-    "screen": "recepcion"
-  },
-  {
-    "method": "POST",
-    "path": "/api/warehouse/orders/{id}/receive",
-    "screen": "recepcion"
-  },
-  {
-    "method": "POST",
-    "path": "/api/warehouse/orders/{orderId}/packages/{packageId}/move",
-    "screen": "recepcion"
+    "module": "vehiculos",
+    "title": "Editar"
   },
   {
     "method": "GET",
     "path": "/api/warehouse-locations",
-    "screen": "ubicaciones"
+    "module": "ubicaciones",
+    "title": "Listar"
   },
   {
     "method": "POST",
     "path": "/api/warehouse-locations",
-    "screen": "ubicaciones"
+    "module": "ubicaciones",
+    "title": "Registrar"
   },
   {
     "method": "PUT",
     "path": "/api/warehouse-locations/{id}",
-    "screen": "ubicaciones"
+    "module": "ubicaciones",
+    "title": "Editar"
+  },
+  {
+    "method": "GET",
+    "path": "/api/warehouse/stock",
+    "module": "recepcion",
+    "title": "Consultar existencias"
+  },
+  {
+    "method": "GET",
+    "path": "/api/warehouse/packages/{packageId}/movements",
+    "module": "recepcion",
+    "title": "Historial de movimientos"
+  },
+  {
+    "method": "POST",
+    "path": "/api/warehouse/orders/{id}/receive",
+    "module": "recepcion",
+    "title": "Recibir pedido"
+  },
+  {
+    "method": "POST",
+    "path": "/api/warehouse/orders/{orderId}/packages/{packageId}/move",
+    "module": "recepcion",
+    "title": "Mover paquete"
   },
   {
     "method": "GET",
     "path": "/api/warehouses",
-    "screen": "almacenes"
+    "module": "almacenes",
+    "title": "Listar"
   },
   {
     "method": "POST",
     "path": "/api/warehouses",
-    "screen": "almacenes"
+    "module": "almacenes",
+    "title": "Registrar"
   },
   {
     "method": "PUT",
     "path": "/api/warehouses/{id}",
-    "screen": "almacenes"
+    "module": "almacenes",
+    "title": "Editar"
   },
   {
     "method": "GET",
-    "path": "/health/live",
-    "screen": "login"
+    "path": "/health/live"
   },
   {
     "method": "GET",
-    "path": "/health/ready",
-    "screen": "dashboard"
+    "path": "/health/ready"
   }
 ]

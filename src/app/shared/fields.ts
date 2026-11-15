@@ -1,17 +1,36 @@
+import { DistrictPicker } from './district-picker';
+import { ReferencePicker } from './reference-picker';
+import { display } from '../core/display';
+import { AgencyPicker } from './agency-picker';
 import { Component, Input, inject, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Schema, Data } from '../core/contracts';
 import { initial, label, resolve } from '../core/schema';
 import { Api } from '../core/api';
+import { OrderPicker } from './order-picker';
+import { RolePicker } from './role-picker';
+import { PermissionPicker } from './permission-picker';
 
 @Component({
   selector: 'app-fields',
   standalone: true,
-  imports: [FormsModule],
+  imports: [DistrictPicker, ReferencePicker, FormsModule, PermissionPicker, RolePicker, OrderPicker, AgencyPicker],
   template: `
     @for (key of keys(); track key) {
       @let s = schemaFor(key);
-      @if (s.type === 'object') {
+      @if (key === 'permissionIds') {
+        <app-permission-picker [value]="model[key] || []" (valueChange)="setValue(key, $event)" />
+      } @else if (key === 'roleIds') {
+        <app-role-picker [value]="model[key] || []" (valueChange)="setValue(key, $event)" />
+       } @else if (['agencyid', 'originagencyid', 'destinationagencyid'].includes(key.toLowerCase())) {
+        <app-agency-picker [label]="label(key)" [value]="model[key] || ''" (valueChange)="setValue(key, $event)" />
+      } @else if ((key.toLowerCase() === 'orderid' || (key.toLowerCase() === 'id' && resource === 'orders'))) {
+        <app-order-picker [value]="model[key] || ''" (valueChange)="setValue(key, $event)" />
+      } @else if (key.toLowerCase() === 'districtid') {
+        <app-district-picker [value]="model[key] || ''" (valueChange)="setValue(key, $event)" />
+      } @else if (s.type !== 'array' && lookupFor(key) && key !== 'quotationId') {
+        <app-reference-picker [route]="lookupFor(key)" [label]="label(key)" [code]="key.endsWith('Code')" [value]="model[key] || ''" (valueChange)="setValue(key, $event)" />
+      } @else if (s.type === 'object') {
         <fieldset>
           <legend>{{ label(key) }}</legend>
           <app-fields
@@ -78,10 +97,11 @@ import { Api } from '../core/api';
             >
               <option value="">Seleccionar</option>
               @for (choice of choices(key); track choice) {
-                <option [value]="choice">{{ choice }}</option>
+                <option [value]="choice">{{ display(choice) }}</option>
               }
             </select>
           } @else {
+            @if (!lookupFor(key)) {
             <input
               [id]="prefix + '-' + key"
               [type]="inputType(key, s)"
@@ -91,8 +111,34 @@ import { Api } from '../core/api';
               [attr.list]="prefix + '-' + key + '-options'"
               [autocomplete]="key.toLowerCase().includes('password') ? 'new-password' : 'off'"
             />
+            }
             @if (lookupFor(key)) {
               <button type="button" (click)="load(key)">Buscar opciones</button>
+              @if (key === 'quotationId' && quotationOrders().length) {
+                <label>Pedido de la cotización
+                  <select (change)="loadQuotations(key, $any($event.target).value)">
+                    <option value="">Elegir pedido por seguimiento</option>
+                    @for (order of quotationOrders(); track order['id']) {
+                      <option [value]="order['id']">{{ order['trackingNumber'] || order['id'] }}</option>
+                    }
+                  </select>
+                </label>
+              }
+              @if ((options()[key] || []).length) {
+                <label>Buscar {{ label(key) }}
+                  <input type="search" (input)="searches[key] = $any($event.target).value" />
+                </label>
+                <select
+                  [attr.aria-label]="'Seleccionar ' + label(key)"
+                  [value]="model[key] || ''"
+                  (change)="setValue(key, $any($event.target).value)"
+                >
+                  <option value="">Elegir un registro</option>
+                  @for (option of filteredOptions(key); track option.value) {
+                    <option [value]="option.value">{{ option.text }}</option>
+                  }
+                </select>
+              }
             }
             <datalist [id]="prefix + '-' + key + '-options'">
               @for (option of options()[key] || []; track option.value) {
@@ -113,10 +159,24 @@ export class Fields {
   @Input({ required: true }) model!: Data;
   @Input() prefix = 'field';
   @Input() context = '';
+  @Input() resource = '';
   api = inject(Api);
   options = signal<Record<string, { value: string; text: string }[]>>({});
   notice = signal('');
-  label = label;
+  quotationOrders = signal<Data[]>([]);
+  searches: Record<string, string> = {};
+  filteredOptions(key: string) {
+    const normalize = (value: string) => value.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
+    const query = normalize(this.searches[key] || '');
+    return (this.options()[key] || []).filter(option => option.value === this.model[key] || normalize(option.text).includes(query));
+  }
+  label = (key: string) =>
+    key === 'id' && this.resource
+      ? this.resource === 'sales'
+        ? 'Venta'
+        : 'Sesión de caja'
+      : label(key);
+  display = display;
   resolve = resolve;
   initial = initial;
   itemKey(entry: any, index: number) {
@@ -129,7 +189,7 @@ export class Fields {
     this.model[key][index] = value;
   }
   keys() {
-    return Object.keys(resolve(this.schema).properties ?? {});
+    return Object.keys(resolve(this.schema).properties ?? {}).filter(key => !(key === 'id' && this.prefix.includes('packages')));
   }
   schemaFor(key: string) {
     return resolve(resolve(this.schema).properties?.[key] ?? {});
@@ -183,7 +243,10 @@ export class Fields {
     return common[key] ?? this.schemaFor(key).enum ?? [];
   }
   lookupFor(key: string): string {
+    key = key.charAt(0).toLowerCase() + key.slice(1);
+    if (key === 'id' && this.resource) return this.resource;
     const routes: Record<string, string> = {
+      saleId: 'sales',
       agencyId: 'agencies',
       originAgencyId: 'agencies',
       destinationAgencyId: 'agencies',
@@ -213,16 +276,26 @@ export class Fields {
     };
     return routes[key] ?? '';
   }
+  async loadQuotations(key: string, orderId: string) {
+    this.options.update(current => ({ ...current, [key]: [] }));
+    this.model[key] = '';
+    if (!orderId) return;
+    this.notice.set('Cargando cotizaciones…');
+    try {
+      const rows = await this.api.request<Data[]>('GET', '/api/quotations/orders/' + encodeURIComponent(orderId));
+      this.options.update(current => ({ ...current, [key]: rows.map(row => ({ value: String(row['id']), text: 'S/ ' + row['quotedAmount'] + ' · ' + (row['quotedAt'] ? new Date(row['quotedAt']).toLocaleString('es-PE') : row['id']) })) }));
+      this.notice.set(rows.length ? 'Selecciona la cotización del pedido.' : 'Este pedido no tiene cotizaciones.');
+    } catch { this.notice.set('No se pudieron cargar las cotizaciones del pedido.'); }
+  }
   async load(key: string) {
     let route = this.lookupFor(key);
     this.notice.set('Cargando opciones…');
     if (key === 'quotationId') {
-      const id = window.prompt('Identificador del pedido para consultar sus cotizaciones');
-      if (!id) {
-        this.notice.set('');
-        return;
-      }
-      route = 'quotations/orders/' + encodeURIComponent(id);
+      try {
+        this.quotationOrders.set(await this.api.request<Data[]>('GET', '/api/orders', undefined, { page: 1, pageSize: 100 }));
+        this.notice.set('Elige un pedido para ver sus cotizaciones (hasta 100 pedidos).');
+      } catch { this.notice.set('No se pudieron consultar los pedidos. Revisa tus permisos e intenta nuevamente.'); }
+      return;
     }
     try {
       const rows = await this.api.request<Data[]>('GET', '/api/' + route, undefined, {
@@ -238,10 +311,16 @@ export class Fields {
               row['fullName'] ??
               row['legalName'] ??
               row['trackingNumber'] ??
+              row['saleNumber'] ??
+              row['orderNumber'] ??
               row['plate'] ??
               row['code'] ??
               row['quotedAmount'] ??
-              row['openedAt'],
+              (row['totalAmount'] !== undefined
+                ? 'Venta · S/ ' + row['totalAmount'] + ' · ' + row['id'].slice(0, 8)
+                : undefined) ??
+              row['openedAt'] ??
+              row['id'],
             row['action'],
           ]
             .filter(Boolean)
@@ -249,11 +328,11 @@ export class Fields {
         })),
       }));
       this.notice.set(
-        `${rows.length} opciones cargadas (hasta 100). También puedes introducir el identificador de otro registro.`,
+        `${rows.length} opciones cargadas (hasta 100). Selecciona un registro por su nombre.`,
       );
     } catch {
       this.notice.set(
-        'No se pudieron cargar opciones para tu cuenta. Puedes introducir el identificador directamente.',
+        'No se pudieron cargar opciones para tu cuenta. Reintenta la carga de opciones.',
       );
     }
   }

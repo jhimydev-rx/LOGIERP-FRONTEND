@@ -6,7 +6,7 @@
     "start": "ng serve --host 127.0.0.1 --port 4200 --proxy-config proxy.conf.json",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "playwright test tests/ui.spec.ts tests/edit.spec.ts",
+    "test": "playwright test tests/ui.spec.ts tests/edit.spec.ts tests/sunat.spec.ts tests/workflows.spec.ts",
     "check:coverage": "node scripts/check-coverage.mjs",
     "test:live": "python3 scripts/test-live.py"
   },

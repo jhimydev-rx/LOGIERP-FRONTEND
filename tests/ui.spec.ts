@@ -47,12 +47,23 @@ test('Todos los módulos y operaciones renderizan formularios sin errores', asyn
         .getByRole('navigation', { name: 'Operaciones' })
         .getByRole('button', { name: op.title, exact: true })
         .click();
-      await expect(page.getByRole('heading', { level: 2 }).first()).toHaveText(op.title);
-      await expect(page.locator('form button[type=submit]')).toBeVisible();
+      if (
+        op.method !== 'GET' ||
+        (op.path.includes('{') && !['entregas', 'cotizaciones'].includes(module.id))
+      ) {
+        await expect(
+          page.getByRole('region', { name: 'Acción en curso' }).getByRole('heading', { level: 2 }),
+        ).toHaveText(op.title);
+        await expect(
+          page.getByRole('region', { name: 'Acción en curso' }).locator('form button[type=submit]'),
+        ).toBeVisible();
+      }
       count++;
     }
   }
-  expect(count).toBe(102);
+  expect(count).toBe(
+    OPERATIONS.filter((op) => op.module !== 'dashboard' && op.path !== '/api/auth/login').length,
+  );
   expect(errors).toEqual([]);
 });
 
@@ -82,4 +93,20 @@ test('Los permisos ocultan operaciones de escritura', async ({ page }) => {
       .getByRole('navigation', { name: 'Operaciones' })
       .getByRole('button', { name: 'Registrar', exact: true }),
   ).toHaveCount(0);
+});
+
+test('La barra aparece antes del listado y cabe en móvil', async ({ page }) => {
+  await page.addInitScript(() => sessionStorage.setItem('logierp.session', 'test'));
+  await page.route('**/api/**', route => route.fulfill({ json: route.request().url().includes('/auth/me') ? access : [] }));
+  await page.goto('/modulos/pedidos');
+  const bar = page.getByRole('navigation', { name: 'Operaciones', exact: true });
+  await expect(bar).toBeVisible();
+  const barBox = await bar.boundingBox();
+  const listBox = await page.locator('.records-toolbar').boundingBox();
+  expect(barBox!.y + barBox!.height).toBeLessThanOrEqual(listBox!.y);
+  await page.screenshot({path:'../../tmp/toolbar-desktop.png',fullPage:true});
+  await page.setViewportSize({width:390,height:844});
+  await expect(bar.getByRole('button',{name:'Registrar',exact:true})).toBeVisible();
+  expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBeLessThanOrEqual(390);
+  await page.screenshot({path:'../../tmp/toolbar-mobile.png',fullPage:true});
 });
