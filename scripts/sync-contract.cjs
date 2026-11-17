@@ -31,6 +31,34 @@ const reports = {
   'GET /api/reports/cash': ['Exportar caja Excel', 'CASH:READ', 'sesiones-caja'],
   'GET /api/reports/purchases': ['Exportar compras Excel', 'PURCHASING:READ', 'compras'],
 };
+// Endpoints added when the backend removed conditional logic from controllers.
+const cancelPermissions = {
+  agencies: 'AGENCIES:CANCEL',
+  warehouses: 'WAREHOUSE:CANCEL',
+  'warehouse-locations': 'WAREHOUSE:CANCEL',
+  vehicles: 'TRANSPORT:CANCEL',
+  drivers: 'TRANSPORT:CANCEL',
+  routes: 'TRANSPORT:CANCEL',
+  'cash-registers': 'CASH:CANCEL',
+  suppliers: 'PURCHASING:CANCEL',
+  supplies: 'PURCHASING:CANCEL',
+  'receipt-series': 'SALES:CANCEL',
+};
+const statusActions = {
+  'POST /api/purchase-requests/{id}/submit': ['Enviar solicitud', 'PURCHASING:UPDATE', 'solicitudes'],
+  'POST /api/purchase-requests/{id}/approve': ['Aprobar solicitud', 'PURCHASING:APPROVE', 'solicitudes'],
+  'POST /api/purchase-requests/{id}/reject': ['Rechazar solicitud', 'PURCHASING:APPROVE', 'solicitudes'],
+  'POST /api/purchase-requests/{id}/cancel': ['Cancelar solicitud', 'PURCHASING:CANCEL', 'solicitudes'],
+  'POST /api/purchase-orders/{id}/issue': ['Emitir orden', 'PURCHASING:UPDATE', 'compras'],
+  'POST /api/purchase-orders/{id}/cancel': ['Cancelar orden', 'PURCHASING:CANCEL', 'compras'],
+};
+function activation(key) {
+  const match = /^POST \/api\/([a-z-]+)\/\{id\}\/(activate|deactivate)$/.exec(key);
+  if (!match || !cancelPermissions[match[1]]) return null;
+  const update = old.OPERATIONS.find((o) => o.method === 'PUT' && o.path === `/api/${match[1]}/{id}`);
+  if (!update) throw Error('Sin módulo para ' + key);
+  return [match[2] === 'activate' ? 'Activar' : 'Desactivar', cancelPermissions[match[1]], update.module];
+}
 const operations = [];
 for (const [route, methods] of Object.entries(swagger.paths)) {
   for (const [verb, definition] of Object.entries(methods)) {
@@ -39,7 +67,7 @@ for (const [route, methods] of Object.entries(swagger.paths)) {
     const method = verb.toUpperCase();
     const key = method + ' ' + route;
     const previous = old.OPERATIONS.find((o) => o.method === method && o.path === route);
-    const metadata = sunat[key] || reports[key];
+    const metadata = sunat[key] || reports[key] || statusActions[key] || activation(key);
     if (!previous && !metadata) throw Error('Endpoint sin clasificar: ' + key);
     operations.push({
       ...(previous || { key, module: metadata[2] || 'sunat', title: metadata[0], permissions: [metadata[1]] }),

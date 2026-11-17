@@ -26,8 +26,16 @@ export const MODULES: Module[] = [
     "name": "Auditoría",
     "group": "Seguridad"
   },
-  { "id": "catalogos", "name": "Catálogos", "group": "Configuración" },
-  { "id": "geografia", "name": "Geografía", "group": "Configuración" },
+  {
+    "id": "catalogos",
+    "name": "Catálogos",
+    "group": "Configuración"
+  },
+  {
+    "id": "geografia",
+    "name": "Geografía",
+    "group": "Configuración"
+  },
   {
     "id": "configuracion",
     "name": "Empresa",
@@ -236,6 +244,50 @@ export const OPERATIONS: Operation[] = [
     "body": null
   },
   {
+    "key": "POST /api/agencies/{id}/activate",
+    "module": "agencias",
+    "title": "Activar",
+    "permissions": [
+      "AGENCIES:CANCEL"
+    ],
+    "method": "POST",
+    "path": "/api/agencies/{id}/activate",
+    "parameters": [
+      {
+        "name": "id",
+        "in": "path",
+        "required": true,
+        "schema": {
+          "type": "string",
+          "format": "uuid"
+        }
+      }
+    ],
+    "body": null
+  },
+  {
+    "key": "POST /api/agencies/{id}/deactivate",
+    "module": "agencias",
+    "title": "Desactivar",
+    "permissions": [
+      "AGENCIES:CANCEL"
+    ],
+    "method": "POST",
+    "path": "/api/agencies/{id}/deactivate",
+    "parameters": [
+      {
+        "name": "id",
+        "in": "path",
+        "required": true,
+        "schema": {
+          "type": "string",
+          "format": "uuid"
+        }
+      }
+    ],
+    "body": null
+  },
+  {
     "key": "PUT /api/agencies/{id}/assignments",
     "method": "PUT",
     "path": "/api/agencies/{id}/assignments",
@@ -399,6 +451,50 @@ export const OPERATIONS: Operation[] = [
     "body": {
       "$ref": "#/components/schemas/LogiERP.Application.UseCases.CashRegisters.Commands.UpdateCashRegisterCommand"
     }
+  },
+  {
+    "key": "POST /api/cash-registers/{id}/activate",
+    "module": "cajas",
+    "title": "Activar",
+    "permissions": [
+      "CASH:CANCEL"
+    ],
+    "method": "POST",
+    "path": "/api/cash-registers/{id}/activate",
+    "parameters": [
+      {
+        "name": "id",
+        "in": "path",
+        "required": true,
+        "schema": {
+          "type": "string",
+          "format": "uuid"
+        }
+      }
+    ],
+    "body": null
+  },
+  {
+    "key": "POST /api/cash-registers/{id}/deactivate",
+    "module": "cajas",
+    "title": "Desactivar",
+    "permissions": [
+      "CASH:CANCEL"
+    ],
+    "method": "POST",
+    "path": "/api/cash-registers/{id}/deactivate",
+    "parameters": [
+      {
+        "name": "id",
+        "in": "path",
+        "required": true,
+        "schema": {
+          "type": "string",
+          "format": "uuid"
+        }
+      }
+    ],
+    "body": null
   },
   {
     "key": "GET /api/cash-sessions",
@@ -933,6 +1029,50 @@ export const OPERATIONS: Operation[] = [
     }
   },
   {
+    "key": "POST /api/drivers/{id}/activate",
+    "module": "conductores",
+    "title": "Activar",
+    "permissions": [
+      "TRANSPORT:CANCEL"
+    ],
+    "method": "POST",
+    "path": "/api/drivers/{id}/activate",
+    "parameters": [
+      {
+        "name": "id",
+        "in": "path",
+        "required": true,
+        "schema": {
+          "type": "string",
+          "format": "uuid"
+        }
+      }
+    ],
+    "body": null
+  },
+  {
+    "key": "POST /api/drivers/{id}/deactivate",
+    "module": "conductores",
+    "title": "Desactivar",
+    "permissions": [
+      "TRANSPORT:CANCEL"
+    ],
+    "method": "POST",
+    "path": "/api/drivers/{id}/deactivate",
+    "parameters": [
+      {
+        "name": "id",
+        "in": "path",
+        "required": true,
+        "schema": {
+          "type": "string",
+          "format": "uuid"
+        }
+      }
+    ],
+    "body": null
+  },
+  {
     "key": "GET /api/orders",
     "method": "GET",
     "path": "/api/orders",
@@ -1174,14 +1314,14 @@ export const OPERATIONS: Operation[] = [
     "body": null
   },
   {
-    "key": "POST /api/purchase-orders/{id}/status",
-    "method": "POST",
-    "path": "/api/purchase-orders/{id}/status",
+    "key": "POST /api/purchase-orders/{id}/issue",
     "module": "compras",
-    "title": "Cambiar estado",
+    "title": "Emitir orden",
     "permissions": [
       "PURCHASING:UPDATE"
     ],
+    "method": "POST",
+    "path": "/api/purchase-orders/{id}/issue",
     "parameters": [
       {
         "name": "id",
@@ -1193,9 +1333,29 @@ export const OPERATIONS: Operation[] = [
         }
       }
     ],
-    "body": {
-      "$ref": "#/components/schemas/LogiERP.Application.UseCases.PurchaseOrders.Commands.ChangePurchaseOrderStatusCommand"
-    }
+    "body": null
+  },
+  {
+    "key": "POST /api/purchase-orders/{id}/cancel",
+    "module": "compras",
+    "title": "Cancelar orden",
+    "permissions": [
+      "PURCHASING:CANCEL"
+    ],
+    "method": "POST",
+    "path": "/api/purchase-orders/{id}/cancel",
+    "parameters": [
+      {
+        "name": "id",
+        "in": "path",
+        "required": true,
+        "schema": {
+          "type": "string",
+          "format": "uuid"
+        }
+      }
+    ],
+    "body": null
   },
   {
     "key": "POST /api/purchase-orders/allocations",
@@ -1309,14 +1469,14 @@ export const OPERATIONS: Operation[] = [
     "body": null
   },
   {
-    "key": "POST /api/purchase-requests/{id}/status",
-    "method": "POST",
-    "path": "/api/purchase-requests/{id}/status",
+    "key": "POST /api/purchase-requests/{id}/submit",
     "module": "solicitudes",
-    "title": "Cambiar estado",
+    "title": "Enviar solicitud",
     "permissions": [
       "PURCHASING:UPDATE"
     ],
+    "method": "POST",
+    "path": "/api/purchase-requests/{id}/submit",
     "parameters": [
       {
         "name": "id",
@@ -1328,9 +1488,73 @@ export const OPERATIONS: Operation[] = [
         }
       }
     ],
-    "body": {
-      "$ref": "#/components/schemas/LogiERP.Application.UseCases.PurchaseRequests.Commands.ChangePurchaseRequestStatusCommand"
-    }
+    "body": null
+  },
+  {
+    "key": "POST /api/purchase-requests/{id}/approve",
+    "module": "solicitudes",
+    "title": "Aprobar solicitud",
+    "permissions": [
+      "PURCHASING:APPROVE"
+    ],
+    "method": "POST",
+    "path": "/api/purchase-requests/{id}/approve",
+    "parameters": [
+      {
+        "name": "id",
+        "in": "path",
+        "required": true,
+        "schema": {
+          "type": "string",
+          "format": "uuid"
+        }
+      }
+    ],
+    "body": null
+  },
+  {
+    "key": "POST /api/purchase-requests/{id}/reject",
+    "module": "solicitudes",
+    "title": "Rechazar solicitud",
+    "permissions": [
+      "PURCHASING:APPROVE"
+    ],
+    "method": "POST",
+    "path": "/api/purchase-requests/{id}/reject",
+    "parameters": [
+      {
+        "name": "id",
+        "in": "path",
+        "required": true,
+        "schema": {
+          "type": "string",
+          "format": "uuid"
+        }
+      }
+    ],
+    "body": null
+  },
+  {
+    "key": "POST /api/purchase-requests/{id}/cancel",
+    "module": "solicitudes",
+    "title": "Cancelar solicitud",
+    "permissions": [
+      "PURCHASING:CANCEL"
+    ],
+    "method": "POST",
+    "path": "/api/purchase-requests/{id}/cancel",
+    "parameters": [
+      {
+        "name": "id",
+        "in": "path",
+        "required": true,
+        "schema": {
+          "type": "string",
+          "format": "uuid"
+        }
+      }
+    ],
+    "body": null
   },
   {
     "key": "POST /api/quotations",
@@ -1458,6 +1682,50 @@ export const OPERATIONS: Operation[] = [
     "body": {
       "$ref": "#/components/schemas/LogiERP.Application.UseCases.ReceiptSeries.Commands.UpdateReceiptSeriesCommand"
     }
+  },
+  {
+    "key": "POST /api/receipt-series/{id}/activate",
+    "module": "series",
+    "title": "Activar",
+    "permissions": [
+      "SALES:CANCEL"
+    ],
+    "method": "POST",
+    "path": "/api/receipt-series/{id}/activate",
+    "parameters": [
+      {
+        "name": "id",
+        "in": "path",
+        "required": true,
+        "schema": {
+          "type": "string",
+          "format": "uuid"
+        }
+      }
+    ],
+    "body": null
+  },
+  {
+    "key": "POST /api/receipt-series/{id}/deactivate",
+    "module": "series",
+    "title": "Desactivar",
+    "permissions": [
+      "SALES:CANCEL"
+    ],
+    "method": "POST",
+    "path": "/api/receipt-series/{id}/deactivate",
+    "parameters": [
+      {
+        "name": "id",
+        "in": "path",
+        "required": true,
+        "schema": {
+          "type": "string",
+          "format": "uuid"
+        }
+      }
+    ],
+    "body": null
   },
   {
     "key": "GET /api/reports/sales",
@@ -1665,6 +1933,50 @@ export const OPERATIONS: Operation[] = [
     "body": {
       "$ref": "#/components/schemas/LogiERP.Application.UseCases.Routes.Commands.UpdateRouteCommand"
     }
+  },
+  {
+    "key": "POST /api/routes/{id}/activate",
+    "module": "rutas",
+    "title": "Activar",
+    "permissions": [
+      "TRANSPORT:CANCEL"
+    ],
+    "method": "POST",
+    "path": "/api/routes/{id}/activate",
+    "parameters": [
+      {
+        "name": "id",
+        "in": "path",
+        "required": true,
+        "schema": {
+          "type": "string",
+          "format": "uuid"
+        }
+      }
+    ],
+    "body": null
+  },
+  {
+    "key": "POST /api/routes/{id}/deactivate",
+    "module": "rutas",
+    "title": "Desactivar",
+    "permissions": [
+      "TRANSPORT:CANCEL"
+    ],
+    "method": "POST",
+    "path": "/api/routes/{id}/deactivate",
+    "parameters": [
+      {
+        "name": "id",
+        "in": "path",
+        "required": true,
+        "schema": {
+          "type": "string",
+          "format": "uuid"
+        }
+      }
+    ],
+    "body": null
   },
   {
     "key": "GET /api/sales",
@@ -2025,6 +2337,50 @@ export const OPERATIONS: Operation[] = [
     }
   },
   {
+    "key": "POST /api/suppliers/{id}/activate",
+    "module": "proveedores",
+    "title": "Activar",
+    "permissions": [
+      "PURCHASING:CANCEL"
+    ],
+    "method": "POST",
+    "path": "/api/suppliers/{id}/activate",
+    "parameters": [
+      {
+        "name": "id",
+        "in": "path",
+        "required": true,
+        "schema": {
+          "type": "string",
+          "format": "uuid"
+        }
+      }
+    ],
+    "body": null
+  },
+  {
+    "key": "POST /api/suppliers/{id}/deactivate",
+    "module": "proveedores",
+    "title": "Desactivar",
+    "permissions": [
+      "PURCHASING:CANCEL"
+    ],
+    "method": "POST",
+    "path": "/api/suppliers/{id}/deactivate",
+    "parameters": [
+      {
+        "name": "id",
+        "in": "path",
+        "required": true,
+        "schema": {
+          "type": "string",
+          "format": "uuid"
+        }
+      }
+    ],
+    "body": null
+  },
+  {
     "key": "GET /api/supplies",
     "method": "GET",
     "path": "/api/supplies",
@@ -2090,6 +2446,50 @@ export const OPERATIONS: Operation[] = [
     "body": {
       "$ref": "#/components/schemas/LogiERP.Application.UseCases.Supplies.Commands.UpdateSupplyCommand"
     }
+  },
+  {
+    "key": "POST /api/supplies/{id}/activate",
+    "module": "suministros",
+    "title": "Activar",
+    "permissions": [
+      "PURCHASING:CANCEL"
+    ],
+    "method": "POST",
+    "path": "/api/supplies/{id}/activate",
+    "parameters": [
+      {
+        "name": "id",
+        "in": "path",
+        "required": true,
+        "schema": {
+          "type": "string",
+          "format": "uuid"
+        }
+      }
+    ],
+    "body": null
+  },
+  {
+    "key": "POST /api/supplies/{id}/deactivate",
+    "module": "suministros",
+    "title": "Desactivar",
+    "permissions": [
+      "PURCHASING:CANCEL"
+    ],
+    "method": "POST",
+    "path": "/api/supplies/{id}/deactivate",
+    "parameters": [
+      {
+        "name": "id",
+        "in": "path",
+        "required": true,
+        "schema": {
+          "type": "string",
+          "format": "uuid"
+        }
+      }
+    ],
+    "body": null
   },
   {
     "key": "GET /api/tariffs",
@@ -2540,6 +2940,50 @@ export const OPERATIONS: Operation[] = [
     }
   },
   {
+    "key": "POST /api/vehicles/{id}/activate",
+    "module": "vehiculos",
+    "title": "Activar",
+    "permissions": [
+      "TRANSPORT:CANCEL"
+    ],
+    "method": "POST",
+    "path": "/api/vehicles/{id}/activate",
+    "parameters": [
+      {
+        "name": "id",
+        "in": "path",
+        "required": true,
+        "schema": {
+          "type": "string",
+          "format": "uuid"
+        }
+      }
+    ],
+    "body": null
+  },
+  {
+    "key": "POST /api/vehicles/{id}/deactivate",
+    "module": "vehiculos",
+    "title": "Desactivar",
+    "permissions": [
+      "TRANSPORT:CANCEL"
+    ],
+    "method": "POST",
+    "path": "/api/vehicles/{id}/deactivate",
+    "parameters": [
+      {
+        "name": "id",
+        "in": "path",
+        "required": true,
+        "schema": {
+          "type": "string",
+          "format": "uuid"
+        }
+      }
+    ],
+    "body": null
+  },
+  {
     "key": "GET /api/warehouse-locations",
     "method": "GET",
     "path": "/api/warehouse-locations",
@@ -2605,6 +3049,50 @@ export const OPERATIONS: Operation[] = [
     "body": {
       "$ref": "#/components/schemas/LogiERP.Application.UseCases.WarehouseLocations.Commands.UpdateWarehouseLocationCommand"
     }
+  },
+  {
+    "key": "POST /api/warehouse-locations/{id}/activate",
+    "module": "ubicaciones",
+    "title": "Activar",
+    "permissions": [
+      "WAREHOUSE:CANCEL"
+    ],
+    "method": "POST",
+    "path": "/api/warehouse-locations/{id}/activate",
+    "parameters": [
+      {
+        "name": "id",
+        "in": "path",
+        "required": true,
+        "schema": {
+          "type": "string",
+          "format": "uuid"
+        }
+      }
+    ],
+    "body": null
+  },
+  {
+    "key": "POST /api/warehouse-locations/{id}/deactivate",
+    "module": "ubicaciones",
+    "title": "Desactivar",
+    "permissions": [
+      "WAREHOUSE:CANCEL"
+    ],
+    "method": "POST",
+    "path": "/api/warehouse-locations/{id}/deactivate",
+    "parameters": [
+      {
+        "name": "id",
+        "in": "path",
+        "required": true,
+        "schema": {
+          "type": "string",
+          "format": "uuid"
+        }
+      }
+    ],
+    "body": null
   },
   {
     "key": "GET /api/warehouse/stock",
@@ -2820,6 +3308,50 @@ export const OPERATIONS: Operation[] = [
     "body": {
       "$ref": "#/components/schemas/LogiERP.Application.UseCases.Warehouses.Commands.UpdateWarehouseCommand"
     }
+  },
+  {
+    "key": "POST /api/warehouses/{id}/activate",
+    "module": "almacenes",
+    "title": "Activar",
+    "permissions": [
+      "WAREHOUSE:CANCEL"
+    ],
+    "method": "POST",
+    "path": "/api/warehouses/{id}/activate",
+    "parameters": [
+      {
+        "name": "id",
+        "in": "path",
+        "required": true,
+        "schema": {
+          "type": "string",
+          "format": "uuid"
+        }
+      }
+    ],
+    "body": null
+  },
+  {
+    "key": "POST /api/warehouses/{id}/deactivate",
+    "module": "almacenes",
+    "title": "Desactivar",
+    "permissions": [
+      "WAREHOUSE:CANCEL"
+    ],
+    "method": "POST",
+    "path": "/api/warehouses/{id}/deactivate",
+    "parameters": [
+      {
+        "name": "id",
+        "in": "path",
+        "required": true,
+        "schema": {
+          "type": "string",
+          "format": "uuid"
+        }
+      }
+    ],
+    "body": null
   }
 ];
 
@@ -4413,9 +4945,6 @@ export const SCHEMAS: Record<string, Schema> = {
         "type": "number",
         "format": "double",
         "nullable": true
-      },
-      "isActive": {
-        "type": "boolean"
       }
     },
     "additionalProperties": false
@@ -4513,9 +5042,6 @@ export const SCHEMAS: Record<string, Schema> = {
       "name": {
         "type": "string",
         "nullable": true
-      },
-      "isActive": {
-        "type": "boolean"
       }
     },
     "additionalProperties": false
@@ -4711,9 +5237,6 @@ export const SCHEMAS: Record<string, Schema> = {
       "phone": {
         "type": "string",
         "nullable": true
-      },
-      "isActive": {
-        "type": "boolean"
       }
     },
     "additionalProperties": false
@@ -4943,16 +5466,6 @@ export const SCHEMAS: Record<string, Schema> = {
     },
     "additionalProperties": false
   },
-  "LogiERP.Application.UseCases.PurchaseOrders.Commands.ChangePurchaseOrderStatusCommand": {
-    "type": "object",
-    "properties": {
-      "statusCode": {
-        "type": "string",
-        "nullable": true
-      }
-    },
-    "additionalProperties": false
-  },
   "LogiERP.Application.UseCases.PurchaseOrders.Commands.CreatePurchaseOrderCommand": {
     "type": "object",
     "properties": {
@@ -5028,16 +5541,6 @@ export const SCHEMAS: Record<string, Schema> = {
     },
     "additionalProperties": false
   },
-  "LogiERP.Application.UseCases.PurchaseRequests.Commands.ChangePurchaseRequestStatusCommand": {
-    "type": "object",
-    "properties": {
-      "statusCode": {
-        "type": "string",
-        "nullable": true
-      }
-    },
-    "additionalProperties": false
-  },
   "LogiERP.Application.UseCases.PurchaseRequests.Commands.CreatePurchaseRequestCommand": {
     "type": "object",
     "properties": {
@@ -5104,9 +5607,6 @@ export const SCHEMAS: Record<string, Schema> = {
       "code": {
         "type": "string",
         "nullable": true
-      },
-      "isActive": {
-        "type": "boolean"
       }
     },
     "additionalProperties": false
@@ -5232,9 +5732,6 @@ export const SCHEMAS: Record<string, Schema> = {
         "type": "integer",
         "format": "int32",
         "nullable": true
-      },
-      "isActive": {
-        "type": "boolean"
       }
     },
     "additionalProperties": false
@@ -5368,9 +5865,6 @@ export const SCHEMAS: Record<string, Schema> = {
       "email": {
         "type": "string",
         "nullable": true
-      },
-      "isActive": {
-        "type": "boolean"
       }
     },
     "additionalProperties": false
@@ -5410,9 +5904,6 @@ export const SCHEMAS: Record<string, Schema> = {
       "unitCode": {
         "type": "string",
         "nullable": true
-      },
-      "isActive": {
-        "type": "boolean"
       }
     },
     "additionalProperties": false
@@ -5686,9 +6177,6 @@ export const SCHEMAS: Record<string, Schema> = {
       "capacityKg": {
         "type": "number",
         "format": "double"
-      },
-      "isActive": {
-        "type": "boolean"
       }
     },
     "additionalProperties": false
@@ -5728,9 +6216,6 @@ export const SCHEMAS: Record<string, Schema> = {
       "name": {
         "type": "string",
         "nullable": true
-      },
-      "isActive": {
-        "type": "boolean"
       }
     },
     "additionalProperties": false
@@ -5770,9 +6255,6 @@ export const SCHEMAS: Record<string, Schema> = {
       "name": {
         "type": "string",
         "nullable": true
-      },
-      "isActive": {
-        "type": "boolean"
       }
     },
     "additionalProperties": false

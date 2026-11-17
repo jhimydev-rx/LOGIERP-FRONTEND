@@ -24,6 +24,18 @@
     "title": "Consultar detalle"
   },
   {
+    "method": "POST",
+    "path": "/api/agencies/{id}/activate",
+    "module": "agencias",
+    "title": "Activar"
+  },
+  {
+    "method": "POST",
+    "path": "/api/agencies/{id}/deactivate",
+    "module": "agencias",
+    "title": "Desactivar"
+  },
+  {
     "method": "PUT",
     "path": "/api/agencies/{id}/assignments",
     "module": "agencias",
@@ -78,6 +90,18 @@
     "title": "Editar"
   },
   {
+    "method": "POST",
+    "path": "/api/cash-registers/{id}/activate",
+    "module": "cajas",
+    "title": "Activar"
+  },
+  {
+    "method": "POST",
+    "path": "/api/cash-registers/{id}/deactivate",
+    "module": "cajas",
+    "title": "Desactivar"
+  },
+  {
     "method": "GET",
     "path": "/api/cash-sessions",
     "module": "sesiones-caja",
@@ -116,14 +140,14 @@
   {
     "method": "GET",
     "path": "/api/configuration/catalogs/{catalog}",
-    "module": "configuracion",
+    "module": "catalogos",
     "title": "Consultar catálogo"
   },
   {
     "method": "PUT",
     "path": "/api/configuration/catalogs/{catalog}/{code}",
-    "module": "configuracion",
-    "title": "Guardar catálogo"
+    "module": "catalogos",
+    "title": "Guardar opción del catálogo"
   },
   {
     "method": "GET",
@@ -140,7 +164,7 @@
   {
     "method": "GET",
     "path": "/api/configuration/geography/{level}",
-    "module": "configuracion",
+    "module": "geografia",
     "title": "Consultar geografía"
   },
   {
@@ -216,6 +240,18 @@
     "title": "Editar"
   },
   {
+    "method": "POST",
+    "path": "/api/drivers/{id}/activate",
+    "module": "conductores",
+    "title": "Activar"
+  },
+  {
+    "method": "POST",
+    "path": "/api/drivers/{id}/deactivate",
+    "module": "conductores",
+    "title": "Desactivar"
+  },
+  {
     "method": "GET",
     "path": "/api/orders",
     "module": "pedidos",
@@ -277,9 +313,15 @@
   },
   {
     "method": "POST",
-    "path": "/api/purchase-orders/{id}/status",
+    "path": "/api/purchase-orders/{id}/issue",
     "module": "compras",
-    "title": "Cambiar estado"
+    "title": "Emitir orden"
+  },
+  {
+    "method": "POST",
+    "path": "/api/purchase-orders/{id}/cancel",
+    "module": "compras",
+    "title": "Cancelar orden"
   },
   {
     "method": "POST",
@@ -313,9 +355,27 @@
   },
   {
     "method": "POST",
-    "path": "/api/purchase-requests/{id}/status",
+    "path": "/api/purchase-requests/{id}/submit",
     "module": "solicitudes",
-    "title": "Cambiar estado"
+    "title": "Enviar solicitud"
+  },
+  {
+    "method": "POST",
+    "path": "/api/purchase-requests/{id}/approve",
+    "module": "solicitudes",
+    "title": "Aprobar solicitud"
+  },
+  {
+    "method": "POST",
+    "path": "/api/purchase-requests/{id}/reject",
+    "module": "solicitudes",
+    "title": "Rechazar solicitud"
+  },
+  {
+    "method": "POST",
+    "path": "/api/purchase-requests/{id}/cancel",
+    "module": "solicitudes",
+    "title": "Cancelar solicitud"
   },
   {
     "method": "POST",
@@ -346,6 +406,18 @@
     "path": "/api/receipt-series/{id}",
     "module": "series",
     "title": "Editar"
+  },
+  {
+    "method": "POST",
+    "path": "/api/receipt-series/{id}/activate",
+    "module": "series",
+    "title": "Activar"
+  },
+  {
+    "method": "POST",
+    "path": "/api/receipt-series/{id}/deactivate",
+    "module": "series",
+    "title": "Desactivar"
   },
   {
     "method": "GET",
@@ -400,6 +472,18 @@
     "path": "/api/routes/{id}",
     "module": "rutas",
     "title": "Editar"
+  },
+  {
+    "method": "POST",
+    "path": "/api/routes/{id}/activate",
+    "module": "rutas",
+    "title": "Activar"
+  },
+  {
+    "method": "POST",
+    "path": "/api/routes/{id}/deactivate",
+    "module": "rutas",
+    "title": "Desactivar"
   },
   {
     "method": "GET",
@@ -492,6 +576,18 @@
     "title": "Editar"
   },
   {
+    "method": "POST",
+    "path": "/api/suppliers/{id}/activate",
+    "module": "proveedores",
+    "title": "Activar"
+  },
+  {
+    "method": "POST",
+    "path": "/api/suppliers/{id}/deactivate",
+    "module": "proveedores",
+    "title": "Desactivar"
+  },
+  {
     "method": "GET",
     "path": "/api/supplies",
     "module": "suministros",
@@ -508,6 +604,18 @@
     "path": "/api/supplies/{id}",
     "module": "suministros",
     "title": "Editar"
+  },
+  {
+    "method": "POST",
+    "path": "/api/supplies/{id}/activate",
+    "module": "suministros",
+    "title": "Activar"
+  },
+  {
+    "method": "POST",
+    "path": "/api/supplies/{id}/deactivate",
+    "module": "suministros",
+    "title": "Desactivar"
   },
   {
     "method": "GET",
@@ -624,6 +732,18 @@
     "title": "Editar"
   },
   {
+    "method": "POST",
+    "path": "/api/vehicles/{id}/activate",
+    "module": "vehiculos",
+    "title": "Activar"
+  },
+  {
+    "method": "POST",
+    "path": "/api/vehicles/{id}/deactivate",
+    "module": "vehiculos",
+    "title": "Desactivar"
+  },
+  {
     "method": "GET",
     "path": "/api/warehouse-locations",
     "module": "ubicaciones",
@@ -640,6 +760,18 @@
     "path": "/api/warehouse-locations/{id}",
     "module": "ubicaciones",
     "title": "Editar"
+  },
+  {
+    "method": "POST",
+    "path": "/api/warehouse-locations/{id}/activate",
+    "module": "ubicaciones",
+    "title": "Activar"
+  },
+  {
+    "method": "POST",
+    "path": "/api/warehouse-locations/{id}/deactivate",
+    "module": "ubicaciones",
+    "title": "Desactivar"
   },
   {
     "method": "GET",
@@ -682,6 +814,18 @@
     "path": "/api/warehouses/{id}",
     "module": "almacenes",
     "title": "Editar"
+  },
+  {
+    "method": "POST",
+    "path": "/api/warehouses/{id}/activate",
+    "module": "almacenes",
+    "title": "Activar"
+  },
+  {
+    "method": "POST",
+    "path": "/api/warehouses/{id}/deactivate",
+    "module": "almacenes",
+    "title": "Desactivar"
   },
   {
     "method": "GET",

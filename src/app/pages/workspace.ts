@@ -18,6 +18,16 @@ import { TransportName } from '../shared/transport-name';
 import { AgencyName } from '../shared/agency-name';
 import { Result } from '../shared/result';
 
+// States in which each purchasing action is offered; the backend still enforces the rule.
+const statusActionStates: Record<string, string[]> = {
+  'POST /api/purchase-requests/{id}/submit': ['DRAFT'],
+  'POST /api/purchase-requests/{id}/approve': ['SUBMITTED'],
+  'POST /api/purchase-requests/{id}/reject': ['SUBMITTED'],
+  'POST /api/purchase-requests/{id}/cancel': ['DRAFT', 'SUBMITTED'],
+  'POST /api/purchase-orders/{id}/issue': ['DRAFT'],
+  'POST /api/purchase-orders/{id}/cancel': ['DRAFT', 'ISSUED'],
+};
+
 @Component({
   standalone: true,
   imports: [ReferenceName, GeographyFilter, FormsModule, Fields, Result, AgencyName, TransportName, WarehouseName],
@@ -851,6 +861,11 @@ export class Workspace implements OnDestroy {
   actionBlocked(op: Operation) {
     if (this.module === 'entregas' && op.path.endsWith('/confirmation') && this.selectedResource === '/api/deliveries/attempts')
       return this.selected()?.['outcomeCode'] !== 'DELIVERED';
+    const row = this.selected();
+    if (row && op.path.endsWith('/{id}/activate')) return row['isActive'] === true;
+    if (row && op.path.endsWith('/{id}/deactivate')) return row['isActive'] === false;
+    const allowedStates = statusActionStates[op.key];
+    if (row && allowedStates) return !allowedStates.includes(row['statusCode']);
     return (
       this.module === 'sesiones-caja' &&
       Boolean(this.selected()?.['closedAt']) &&
